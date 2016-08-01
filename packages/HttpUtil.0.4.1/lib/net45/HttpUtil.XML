@@ -1,0 +1,203 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>HttpUtil</name>
+    </assembly>
+    <members>
+        <member name="T:HttpUtil.HttpConfigurationExtensions">
+            <summary>
+            Provides extension methods for ASP.NET Web API global HttpConfiguration.
+            </summary>
+        </member>
+        <member name="M:HttpUtil.HttpConfigurationExtensions.AttachUnhandledExceptionLogger(System.Web.Http.HttpConfiguration,System.Action{System.String,System.String})">
+            <summary>
+            Attach a log handler routine to unhandled exceptions in ASP.NET Web API methods.
+            </summary>
+            <param name="config"></param>
+            <param name="logHandler"></param>
+        </member>
+        <member name="M:HttpUtil.HttpConfigurationExtensions.SetJsonFormatterAsDefault(System.Web.Http.HttpConfiguration)">
+            <summary>
+            Set JSON formatter as default when returning responses served directly to web browsers (text/html content types).
+            </summary>
+            <param name="config"></param>
+        </member>
+        <member name="T:HttpUtil.JsonResponse">
+            <summary>
+            Provides helper methods for creating ASP.NET Web API HTTP Responses in UTF-8 JSON format.
+            </summary>
+        </member>
+        <member name="M:HttpUtil.JsonResponse.CreateNew(System.Net.HttpStatusCode,System.Object)">
+            <summary>
+            Creates new HTTP response message using provided HTTP status code and JSON-serialized data.
+            </summary>
+            <param name="code"></param>
+            <param name="data"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HttpUtil.JsonResponse.ThrowNew(System.Net.HttpStatusCode,System.Object)">
+            <summary>
+            Creates new HTTP response exception using provided HTTP status code and JSON-serialized data.
+            </summary>
+            <param name="code"></param>
+            <param name="data"></param>
+            <returns></returns>
+        </member>
+        <member name="T:HttpUtil.JsonContent">
+            <summary>
+            Provides HTTP content based on a UTF-8 JSON-serialized object.
+            </summary>
+        </member>
+        <member name="M:HttpUtil.JsonContent.#ctor(System.Object)">
+            <summary>
+            Creates a new instance of JsonContent class.
+            </summary>
+            <param name="payload"></param>
+        </member>
+        <member name="T:HttpUtil.MachineKeyGenerator">
+            <summary>
+            Provides helper method for randomly generating ASP.NET Web.Config machine key.
+            </summary>
+        </member>
+        <member name="M:HttpUtil.MachineKeyGenerator.Generate">
+            <summary>
+            Randomly generates new machine key configuration line 
+            for ASP.NET Web.Config using AES decryption key and HMACSHA256 validation key.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:HttpUtil.Slug">
+            <summary>
+            Provides helper methods for generating an SEO-friendly URL slugs efficiently.
+            http://stackoverflow.com/questions/25259/how-does-stack-overflow-generate-its-seo-friendly-urls/6740497#6740497
+            </summary>
+        </member>
+        <member name="M:HttpUtil.Slug.Create(System.String[])">
+            <summary>
+            Creates a slug from one or more string parameters.
+            </summary>
+            <param name="values"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HttpUtil.Slug.Create(System.String)">
+            <summary>
+            Creates a slug.
+            References:
+            http://www.unicode.org/reports/tr15/tr15-34.html
+            http://meta.stackexchange.com/questions/7435/non-us-ascii-characters-dropped-from-full-profile-url/7696#7696
+            http://stackoverflow.com/questions/25259/how-do-you-include-a-webpage-title-as-part-of-a-webpage-url/25486#25486
+            http://stackoverflow.com/questions/3769457/how-can-i-remove-accents-on-a-string
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HttpUtil.Slug.ConvertEdgeCases(System.Char)">
+            <summary>
+            Lookup table for when normalization pass failed because some characters don’t map to a low ASCII value when normalised. 
+            The normalisation code was inspired by Jon Hanna’s great post in Stack Overflow question: 
+            How can I remove accents on a string? http://stackoverflow.com/questions/3769457
+            </summary>
+            <param name="c"></param>
+            <returns></returns>
+        </member>
+        <member name="T:HttpUtil.TextMediaTypeFormatter">
+            <summary>
+            Represents MediaTypeFormatter to handle plain text and XML-RPC contents.
+            </summary>
+        </member>
+        <member name="M:HttpUtil.TextMediaTypeFormatter.#ctor">
+            <summary>
+            Creates a new instance of TextMediaTypeFormatter.
+            </summary>
+        </member>
+        <member name="M:HttpUtil.TextMediaTypeFormatter.ReadFromStreamAsync(System.Type,System.IO.Stream,System.Net.Http.HttpContent,System.Net.Http.Formatting.IFormatterLogger)">
+            <summary>
+            Called during deserialization to read an object of the specified type from the specified stream.
+            </summary>
+            <param name="type"></param>
+            <param name="readStream"></param>
+            <param name="content"></param>
+            <param name="formatterLogger"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HttpUtil.TextMediaTypeFormatter.WriteToStreamAsync(System.Type,System.Object,System.IO.Stream,System.Net.Http.HttpContent,System.Net.TransportContext,System.Threading.CancellationToken)">
+            <summary>
+            Asynchronously writes an object of the specified type.
+            </summary>
+            <param name="type"></param>
+            <param name="value"></param>
+            <param name="writeStream"></param>
+            <param name="content"></param>
+            <param name="transportContext"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HttpUtil.TextMediaTypeFormatter.CanReadType(System.Type)">
+            <summary>
+            Determines whether this TextMediaTypeFormatter can read objects of the specified type.
+            </summary>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HttpUtil.TextMediaTypeFormatter.CanWriteType(System.Type)">
+            <summary>
+            Determines whether this TextMediaTypeFormatter can write objects of the specified type.
+            </summary>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="T:HttpUtil.UnhandledExceptionLogger">
+            <summary>
+            Provides unhandled exception logger that can be attached to ASP.NET Web API configuration. 
+            </summary>
+        </member>
+        <member name="F:HttpUtil.UnhandledExceptionLogger.LogHandler">
+            <summary>
+            Your custom exception handler. Action parameters are exception string and request context string respectively.
+            </summary>
+        </member>
+        <member name="M:HttpUtil.UnhandledExceptionLogger.#ctor(System.Action{System.String,System.String})">
+            <summary>
+            Creates a new instance of UnhandledExceptionLogger.
+            Accepts action with two string parameters, which are exception string and request context string respectively.
+            </summary>
+            <param name="logHandler"></param>
+        </member>
+        <member name="M:HttpUtil.UnhandledExceptionLogger.Log(System.Web.Http.ExceptionHandling.ExceptionLoggerContext)">
+            <summary>
+            Grabs an exception that triggers in an ASP.NET Web API controller, ignores HttpResponseException.
+            Compiles exception message and stack trace into a string. 
+            If exception is an AggregateException, all inner exceptions are flattened and then also compiled.
+            Compiles request context into string, which includes method, URI, header and body.
+            After that, passes the compiled exception and request string to the log handler.
+            </summary>
+            <param name="context"></param>
+        </member>
+        <member name="T:System.Net.Http.HttpUtilRequestMessageExtensions">
+            <summary>
+            Contains extension methods for HttpRequestMessage object.
+            </summary>
+        </member>
+        <member name="M:System.Net.Http.HttpUtilRequestMessageExtensions.ThrowHttpResponse(System.Net.Http.HttpRequestMessage,System.Net.HttpStatusCode,System.String)">
+            <summary>
+            Throws a HttpResponseException using input status code and message.
+            </summary>
+            <param name="request"></param>
+            <param name="statusCode"></param>
+            <param name="message"></param>
+        </member>
+        <member name="T:System.HttpUtilDateTimeExtensions">
+            <summary>
+            Contains extension methods for HttpRequestMessage object.
+            </summary>
+        </member>
+        <member name="M:System.HttpUtilDateTimeExtensions.ToUniversalTimeIgnoreUnspecified(System.DateTime)">
+            <summary>
+            Converts the value of current DateTime object into UTC.
+            If current object DateTimeKind is unspecified, specify the kind as UTC but no value conversion is performed.
+            </summary>
+            <param name="dt"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>
